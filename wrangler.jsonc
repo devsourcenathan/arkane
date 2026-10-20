@@ -39,8 +39,9 @@
 		"APP_ENV": "production",
 		// Base publique utilisée pour les URL absolues (sitemap, Open Graph).
 		"PUBLIC_BASE_URL": "https://arkane-production.sekuu.com",
-		// Préfixe public pour servir les médias R2 (domaine R2 « arkane-media.sekuu.com »).
-		"PUBLIC_MEDIA_BASE_URL": "https://arkane-media.sekuu.com"
+		// Vide = médias servis par le Worker via /api/v1/media/:key (lecture directe du bucket R2).
+		// Fiable sans domaine R2. Pour de meilleures perfs, brancher un domaine R2 et remettre l'URL ici.
+		"PUBLIC_MEDIA_BASE_URL": ""
 	}
 	// Le domaine personnalisé est géré depuis le dashboard (Worker → Domains & Routes →
 	// Add Domain → Custom Domain). Ne pas remettre de route "custom_domain" ici : cela
