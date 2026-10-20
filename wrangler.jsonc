@@ -1,0 +1,48 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "arkane-production",
+	"main": "./worker/index.ts",
+	"compatibility_date": "2026-10-19",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"upload_source_maps": true,
+	// URL *.workers.dev conservée comme adresse de secours / vérification.
+	"workers_dev": true,
+	"observability": {
+		"enabled": true
+	},
+	"assets": {
+		"binding": "ASSETS",
+		"not_found_handling": "single-page-application",
+		// Le Worker traite d'abord l'API et les routes générées dynamiquement.
+		// Tout le reste est servi par le routeur d'assets (fichiers statiques + fallback SPA).
+		"run_worker_first": [
+			"/api/*",
+			"/sitemap.xml",
+			"/robots.txt"
+		]
+	},
+	"r2_buckets": [
+		{
+			"binding": "MEDIA",
+			"bucket_name": "arkane-media",
+			"preview_bucket_name": "arkane-media-preview"
+		},
+		{
+			"bucket_name": "arkane-media-preview",
+			"binding": "arkane_media_preview",
+			"remote": true
+		}
+	],
+	"vars": {
+		"APP_ENV": "production",
+		// Base publique utilisée pour les URL absolues (sitemap, Open Graph).
+		"PUBLIC_BASE_URL": "https://arkane-production.sekuu.com",
+		// Préfixe public pour servir les médias R2 (domaine R2 « arkane-media.sekuu.com »).
+		"PUBLIC_MEDIA_BASE_URL": "https://arkane-media.sekuu.com"
+	}
+	// Le domaine personnalisé est géré depuis le dashboard (Worker → Domains & Routes →
+	// Add Domain → Custom Domain). Ne pas remettre de route "custom_domain" ici : cela
+	// recrée une entrée "Production and Preview" (avec joker) qui ne provisionne pas le DNS.
+}

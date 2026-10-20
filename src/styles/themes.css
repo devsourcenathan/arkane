@@ -1,0 +1,38 @@
+/* =============================================================================
+   ARKANE — Palettes alternatives (NON activées par défaut)
+   -----------------------------------------------------------------------------
+   Démonstration de l'extensibilité du système de thèmes. Pour ajouter une
+   palette, il suffit de redéfinir les tokens sémantiques sous un sélecteur
+   [data-palette="..."], sans modifier le moindre composant.
+
+   Important : la palette par défaut reste strictement monochrome (tokens.css).
+   Ces alternatives ne s'appliquent que si l'administration les sélectionne
+   explicitement ET si la valeur est autorisée côté serveur
+   (voir shared/theme.ts — ALLOWED_PALETTES).
+   ========================================================================== */
+
+/* Exemple 1 : contraste maximal, "encre" pure (toujours monochrome). */
+:root[data-palette="ink"] {
+  --bg: var(--c-black);
+  --bg-deep: var(--c-black);
+  --surface: var(--c-neutral-950);
+  --surface-strong: var(--c-neutral-900);
+  --surface-hover: var(--c-neutral-850);
+  --border: var(--c-neutral-800);
+  --border-strong: var(--c-neutral-600);
+  --text: var(--c-white);
+  --text-strong: var(--c-white);
+  --text-muted: var(--c-neutral-400);
+  --text-subtle: var(--c-neutral-500);
+}
+
+/* Exemple 2 : emplacement réservé pour une future palette accentuée.
+   Laissé volontairement vide / commenté : à remplir le jour où une couleur
+   d'accent sera validée par le studio.
+
+:root[data-palette="accent"] {
+  --accent: 0 0 0;
+  --btn-primary-bg: var(--accent);
+  --link-hover: var(--accent);
+}
+*/

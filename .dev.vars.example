@@ -1,0 +1,22 @@
+# Copiez ce fichier vers `.dev.vars` et renseignez les valeurs réelles.
+# `.dev.vars` ne doit JAMAIS être committé (voir .gitignore).
+# En production, configurez ces valeurs via `wrangler secret put <NOM>`.
+
+# --- Base de données Neon (Postgres) ---
+# Chaîne de connexion Neon avec SSL. Exemple :
+# postgresql://user:password@ep-xxxx.eu-central-1.aws.neon.tech/arkane?sslmode=require
+DATABASE_URL="postgresql://user:password@host.neon.tech/arkane?sslmode=require"
+
+# --- Sessions admin ---
+# Clé secrète aléatoire (>= 32 octets) utilisée pour signer/dériver les jetons.
+# Générez-la avec : node -e "console.log(require('crypto').randomBytes(48).toString('base64url'))"
+SESSION_SECRET="changez-moi-avec-une-cle-aleatoire-longue"
+
+# --- Cloudflare Turnstile (protection des formulaires publics) ---
+# Clé secrète Turnstile (côté serveur).
+# Clé de TEST qui réussit toujours (dev uniquement) : 1x0000000000000000000000000000000AA
+TURNSTILE_SECRET_KEY="1x0000000000000000000000000000000AA"
+
+# Clé publique (site key) Turnstile, exposée au frontend au build via Vite.
+# Clé de TEST qui réussit toujours (dev uniquement) : 1x00000000000000000000AA
+# (Définie côté client via VITE_TURNSTILE_SITE_KEY dans un fichier .env, voir .env.example)
