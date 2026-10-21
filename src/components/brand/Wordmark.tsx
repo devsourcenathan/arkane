@@ -16,7 +16,7 @@ export function Wordmark({ className }: WordmarkProps) {
         />
         <line x1="10" y1="20" x2="22" y2="20" stroke="currentColor" strokeWidth="2.75" strokeLinecap="round" />
       </svg>
-      <span className="text-[0.95rem] font-bold uppercase tracking-[0.22em] leading-none">Arkane Production</span>
+      <span className="text-[0.95rem] font-bold uppercase tracking-[0.22em] leading-none">Arkane</span>
     </span>
   );
 }
