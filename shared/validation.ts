@@ -22,7 +22,9 @@ export const uuidSchema = z.string().uuid();
 /** Pagination bornée pour toutes les listes. */
 export const paginationSchema = z.object({
   page: z.coerce.number().int().min(1).max(10_000).default(1),
-  pageSize: z.coerce.number().int().min(1).max(60).default(24),
+  // Plafond à 200 : certains sélecteurs admin (ex. choix d'artiste dans le formulaire
+  // Projet) chargent la liste complète en une requête. Payload borné, reste raisonnable.
+  pageSize: z.coerce.number().int().min(1).max(200).default(24),
 });
 
 /** URL vidéo : http(s) uniquement, longueur bornée (anti-abus). */

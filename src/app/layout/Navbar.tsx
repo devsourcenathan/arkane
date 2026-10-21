@@ -63,9 +63,14 @@ export default function Navbar() {
   return (
     <header
       className={`sticky top-0 z-40 transition-colors duration-[var(--dur)] ${
-        scrolled || open
-          ? "border-b border-border bg-bg/85 backdrop-blur-xl"
-          : "border-b border-transparent bg-transparent"
+        open
+          ? // Menu mobile ouvert : fond OPAQUE sans backdrop-filter. Un backdrop-filter sur
+            // le header créerait un bloc conteneur qui casse le `position: fixed` du panneau
+            // (il ne couvrirait plus l'écran → textes superposés).
+            "border-b border-border bg-bg"
+          : scrolled
+            ? "border-b border-border bg-bg/85 backdrop-blur-xl"
+            : "border-b border-transparent bg-transparent"
       }`}
     >
       <nav className="container-page flex h-16 items-center justify-between md:h-20" aria-label={t("Navigation principale", "Main navigation")}>
